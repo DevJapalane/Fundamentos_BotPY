@@ -6,3 +6,6 @@ for i in Lista:
         maior = i
 
 print(f"O maior nivel da lista é: {maior}")
+
+# Índice [0]: Contém o Nome (String).
+# Índice [1]: Contém o Nível (Número).
