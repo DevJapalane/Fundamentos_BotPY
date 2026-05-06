@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import os
+import asyncio
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -27,4 +28,10 @@ async def ping(ctx):
 async def ola(ctx):
     await ctx.send(f'Não vem de conversinha, {ctx.author.mention}! 💀')
 
-bot.run(TOKEN)
+
+async def main():
+    async with bot:
+        await bot.load_extension('cogs.help')  # carrega o help.py
+        await bot.start(TOKEN)
+
+asyncio.run(main())
