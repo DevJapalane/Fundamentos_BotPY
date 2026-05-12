@@ -17,6 +17,18 @@ class Help(commands.Cog):
         )
 
         embed.add_field(
+            name='📊 `!xp [@usuário]`',
+            value='Mostra seu XP e nível (ou de outro usuário)',
+            inline=False
+        )
+
+        embed.add_field(
+            name='🏆 `!rank`',
+            value='Mostra o top 10 do servidor',
+            inline=False
+        )
+
+        embed.add_field(
             name='🏓 `!ping`',
             value='Mostra a latência do bot',
             inline=False
