@@ -71,11 +71,11 @@ YLLWSMKs-BOT/</br>
 1. Clone o repositório</br>
 Abra o terminal na pasta onde deseja salvar o projeto e execute:</br>
 ```
-git clone https://github.com/DevJapalane/Fundamentos_BotPY.git</br>
+git clone https://github.com/DevJapalane/Fundamentos_BotPY.git
 ```
 Depois entre na pasta criada:</br>
 ```
-cd Fundamentos_BotPY</br>
+cd Fundamentos_BotPY
 ```
 
 2. Configure o Ambiente Virtual (Recomendado)</br>
