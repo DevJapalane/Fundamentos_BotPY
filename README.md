@@ -1,60 +1,134 @@
-# 🤖 Discord Bot Base (Python)
+# 🤖 YLLWSMKs BOT (Python)
+Este é um projeto inicial de bot para Discord desenvolvido em Python. O objetivo deste repositório é servir como base sólida para a criação de bots mais complexos, focando em boas práticas de programação, segurança de dados sensíveis e modularidade.</br>
 
-Este é um projeto inicial de bot para Discord desenvolvido em Python. O objetivo deste repositório é servir como base sólida para a criação de bots mais complexos, focando em boas práticas de programação, segurança de dados sensíveis e modularidade.
+# ⚠️ Pré-requisito Obrigatório — Discord Developer Portal
+Antes de qualquer coisa, você precisará criar o seu próprio bot no Discord Developer Portal. O token gerado lá é obrigatório para rodar o projeto — cada pessoa precisa do seu próprio token e do seu próprio bot cadastrado no Discord.</br>
+Passo a passo:</br>
 
-# 🚀 Funcionalidades Atuais
-O bot utiliza o prefixo ! para comandos:
+Acesse discord.com/developers/applications</br>
+Clique em New Application e dê um nome ao seu bot</br>
 
-!ping: Responde com o tempo de latência do bot em milissegundos.
+No menu lateral, clique em Bot</br>
+Clique em Reset Token e copie o token gerado — guarde-o, ele não será exibido novamente</br>
+Ainda na página Bot, role até Privileged Gateway Intents e ative os três toggles:</br>
 
-!ola: Uma resposta personalizada e amigável (ou nem tanto 💀) para o usuário.
-
-# 🛠️ Tecnologias e Bibliotecas
-Para rodar este projeto, as seguintes bibliotecas são essenciais:
-
-## 1. discord.py
-É a biblioteca fundamental que permite a comunicação entre o seu script Python e a API do Discord. Ela lida com os eventos (como o bot ligar) e a execução dos comandos enviados pelos usuários.
-
-## 2. python-dotenv
-Esta biblioteca é crucial para a segurança. Ela permite que o bot leia variáveis de um arquivo externo chamado .env. Isso evita que o seu DISCORD_TOKEN (sua chave secreta) seja exposto diretamente no código-fonte e enviado acidentalmente para o GitHub.
+- [x] Presence Intent</br>
+- [x] Server Members Intent</br>
+- [x] Message Content Intent</br>
 
 
+
+Clique em Save Changes</br>
+Para convidar o bot ao seu servidor, vá em OAuth2 → URL Generator, marque o scope bot, selecione as permissões necessárias e acesse a URL gerada</br>
+
+
+O token gerado é a "senha" do seu bot. Nunca o compartilhe nem suba para o GitHub — é por isso que usamos o arquivo .env.</br>
+
+
+## 🚀 Funcionalidades Atuais
+O bot utiliza o prefixo ! para comandos:</br>
+### Geral
+
+!ping — Responde com o tempo de latência do bot em milissegundos.</br>
+!ola — Uma resposta personalizada e amigável (ou nem tanto 💀) para o usuário.</br>
+!help — Exibe o menu de comandos disponíveis.</br>
+
+### Sistema de XP
+
+!xp [@usuário] — Exibe o nível atual, XP total e barra de progresso para o próximo nível. Pode ser usado sem mencionar ninguém (mostra o seu próprio) ou mencionando outro membro.</br>
+!rank — Exibe o Top 10 de membros mais ativos do servidor, ordenados por XP.</br>
+
+
+## ⚙️ Como o Sistema de XP Funciona
+
+Cada mensagem enviada no servidor concede entre 15 e 25 XP de forma aleatória.</br>
+Há um cooldown de 60 segundos por usuário para evitar farm de XP por spam.</br>
+A fórmula de nível é progressiva — fica cada vez mais difícil subir: XP necessário = 5 × (nível²) + 50 × nível + 100</br>
+Ao subir de nível, o bot anuncia automaticamente no canal com um embed comemorativo.</br>
+Os dados são armazenados localmente em um banco SQLite (database.db), separado por servidor.</br>
+
+
+## 🛠️ Tecnologias e Bibliotecas
+1. discord.py</br>
+Biblioteca fundamental que permite a comunicação entre o script Python e a API do Discord. Lida com eventos e execução de comandos.</br>
+2. python-dotenv</br>
+Permite que o bot leia variáveis do arquivo .env, mantendo o token fora do código-fonte e protegido de exposição acidental no GitHub.</br>
+3. sqlite3</br>
+Biblioteca nativa do Python para gerenciar o banco de dados local. Armazena XP, nível e progresso de cada usuário por servidor, sem necessidade de instalar um banco externo.</br>
+
+## 📁 Estrutura do Projeto
+```
+YLLWSMKs-BOT/</br>
+├── bot.py          # Arquivo principal — inicializa o bot e carrega os módulos
+├── database.db     # Banco de dados SQLite (gerado automaticamente)
+├── .env            # Token do bot (não versionar)
+├── .gitignore      # Arquivos ignorados pelo Git
+└── cogs/</br>
+   ├── help.py     # Comando !help
+   └── xp.py       # Sistema de XP, níveis e ranking
+```
 ## 📦 Como Instalar e Rodar
-### 1. Clone o repositório
-git clone https://github.com/DevJapalane/NOME_DO_REPOSITORIO.git
-cd NOME_DO_REPOSITORIO
-### 2. Configure o Ambiente Virtual (Recomendado)
-Para manter seu sistema limpo e evitar conflitos de versões:
+1. Clone o repositório</br>
+Abra o terminal na pasta onde deseja salvar o projeto e execute:</br>
+```
+git clone https://github.com/DevJapalane/Fundamentos_BotPY.git
+```
+Depois entre na pasta criada:</br>
+```
+cd Fundamentos_BotPY
+```
 
+2. Configure o Ambiente Virtual (Recomendado)</br>
+O ambiente virtual isola as bibliotecas do projeto, evitando conflitos com outras instalações Python no seu sistema.</br>
+Crie o ambiente virtual:</br>
+```
 python -m venv venv
-No Windows:
+```
+Ative o ambiente virtual. O comando varia dependendo do seu sistema operacional:</br>
+Windows (Prompt de Comando ou PowerShell):</br>
+```
 .\venv\Scripts\activate
+```
+### Linux ou Mac (Terminal):</br>
+```
+source venv/bin/activate
+```
+Quando ativo, você verá (venv) aparecendo no início da linha do terminal.</br>
 
-### 3. Instale as dependências
+3. Instale as dependências</br>
+Com o ambiente virtual ativo, instale as bibliotecas necessárias:</br>
+```
 pip install discord.py python-dotenv
-### 4. Configure o arquivo .env
-Crie um arquivo chamado .env na raiz do projeto e adicione seu token:
+```
+4. Configure o arquivo .env
+O arquivo .env guarda o token do seu bot de forma segura, fora do código-fonte. Crie um arquivo chamado .env na raiz do projeto (mesma pasta do bot.py) com o seguinte conteúdo:
 DISCORD_TOKEN=COLE_AQUI_SEU_TOKEN
 
-Nota: Certifique-se de que o arquivo .env está listado no seu .gitignore.
+Substitua COLE_AQUI_SEU_TOKEN pelo token que você gerou no Discord Developer Portal no passo de pré-requisito. Confirme que .env está listado no .gitignore antes de fazer qualquer commit.</br>
 
-## 5. Execute o Bot
-python main.py
 
-# 🛡️ Segurança (.gitignore)
-Este projeto está configurado para ignorar arquivos sensíveis e temporários:
+5. Execute o Bot
+Com tudo configurado, rode o bot com:</br>
+python bot.py</br>
+Se tudo estiver certo, o terminal exibirá ✅ Bot logado como [nome do bot].</br>
 
-.env: Protege suas credenciais.
+## 🛡️ Segurança (.gitignore)
+Este projeto está configurado para ignorar arquivos sensíveis e temporários:</br>
 
-venv/: Evita o upload desnecessário de bibliotecas do ambiente local.
+.env — Protege suas credenciais.</br>
+database.db — Protege os dados dos usuários.</br>
+venv/ — Evita o upload desnecessário de bibliotecas do ambiente local.</br>
+__pycache__/ — Arquivos de compilação do Python.</br>
 
-__pycache__/: Arquivos de compilação do Python.
 
-# 📈 Evolução do Projeto
-Este bot é o ponto de partida para um ecossistema maior que incluirá:
+## 📈 Evolução do Projeto
 
-[ ] Sistema de Economia e XP.
-[ ] Bot de Música com integração Lavalink.
-[ ] Integração com banco de dados PostgreSQL.
+- [x] Sistema de XP e Níveis com ranking por servidor.
+- [ ] Bot de Música com integração Lavalink.
+- [ ] Integração com banco de dados PostgreSQL.
 
-Desenvolvido por: Kalane Maciel, Estudante e CLT
+
+🔗 Repositório
+github.com/DevJapalane/Fundamentos_BotPY</br>
+
+Desenvolvido por: Kalane Maciel — Estudante e CLT
