@@ -57,37 +57,60 @@ Permite que o bot leia variáveis do arquivo .env, mantendo o token fora do cód
 Biblioteca nativa do Python para gerenciar o banco de dados local. Armazena XP, nível e progresso de cada usuário por servidor, sem necessidade de instalar um banco externo.</br>
 
 ## 📁 Estrutura do Projeto
-YLLWSMKs-BOT/
-├── bot.py          # Arquivo principal — inicializa o bot e carrega os módulos</br>
-├── database.db     # Banco de dados SQLite (gerado automaticamente)</br>
-├── .env            # Token do bot (não versionar)</br>
-├── .gitignore      # Arquivos ignorados pelo Git</br>
+```
+YLLWSMKs-BOT/</br>
+├── bot.py          # Arquivo principal — inicializa o bot e carrega os módulos
+├── database.db     # Banco de dados SQLite (gerado automaticamente)
+├── .env            # Token do bot (não versionar)
+├── .gitignore      # Arquivos ignorados pelo Git
 └── cogs/</br>
-&nbsp;&nbsp;&nbsp;├── help.py     # Comando !help</br>
-&nbsp;&nbsp;&nbsp;└── xp.py       # Sistema de XP, níveis e ranking</br>
-
+   ├── help.py     # Comando !help
+   └── xp.py       # Sistema de XP, níveis e ranking
+```
 ## 📦 Como Instalar e Rodar
 1. Clone o repositório</br>
+Abra o terminal na pasta onde deseja salvar o projeto e execute:</br>
+```
 git clone https://github.com/DevJapalane/Fundamentos_BotPY.git</br>
+```
+Depois entre na pasta criada:</br>
+```
 cd Fundamentos_BotPY</br>
+```
+
 2. Configure o Ambiente Virtual (Recomendado)</br>
-python -m venv venv</br>
-
-# Windows:
+O ambiente virtual isola as bibliotecas do projeto, evitando conflitos com outras instalações Python no seu sistema.</br>
+Crie o ambiente virtual:</br>
+```
+python -m venv venv
+```
+Ative o ambiente virtual. O comando varia dependendo do seu sistema operacional:</br>
+Windows (Prompt de Comando ou PowerShell):</br>
+```
 .\venv\Scripts\activate
+```
+### Linux ou Mac (Terminal):</br>
+```
+source venv/bin/activate
+```
+Quando ativo, você verá (venv) aparecendo no início da linha do terminal.</br>
 
-# Linux/Mac:</br>
-source venv/bin/activate</br>
 3. Instale as dependências</br>
-pip install discord.py python-dotenv</br>
-4. Configure o arquivo .env</br>
-Crie um arquivo chamado .env na raiz do projeto e adicione o token gerado no Discord Developer Portal:</br>
-DISCORD_TOKEN=COLE_AQUI_SEU_TOKEN</br>
+Com o ambiente virtual ativo, instale as bibliotecas necessárias:</br>
+```
+pip install discord.py python-dotenv
+```
+4. Configure o arquivo .env
+O arquivo .env guarda o token do seu bot de forma segura, fora do código-fonte. Crie um arquivo chamado .env na raiz do projeto (mesma pasta do bot.py) com o seguinte conteúdo:
+DISCORD_TOKEN=COLE_AQUI_SEU_TOKEN
 
-Certifique-se de que .env está no .gitignore antes de qualquer commit.</br>
+Substitua COLE_AQUI_SEU_TOKEN pelo token que você gerou no Discord Developer Portal no passo de pré-requisito. Confirme que .env está listado no .gitignore antes de fazer qualquer commit.</br>
 
-5. Execute o Bot</br>
+
+5. Execute o Bot
+Com tudo configurado, rode o bot com:</br>
 python bot.py</br>
+Se tudo estiver certo, o terminal exibirá ✅ Bot logado como [nome do bot].</br>
 
 ## 🛡️ Segurança (.gitignore)
 Este projeto está configurado para ignorar arquivos sensíveis e temporários:</br>
